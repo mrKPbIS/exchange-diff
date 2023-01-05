@@ -1,14 +1,14 @@
 # exchange-dif
 
-Project for calcalating difference of actual exchange rate from trade market when changing money.
+Project for calcalating difference of actual exchange rate when changing money.
 
 TODO:
 
-- actual calculation
+- Telegram chat bot
 - docker container
 - linter
-- Telegram chat bot
 
 Done:
 
 - Openexchange API client
+- actual calculation

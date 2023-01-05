@@ -1,9 +1,12 @@
 import { default as express } from 'express';
+import { default as bodyParser } from 'body-parser';
 import { ExchangeDiff } from './exchange/index.js';
 import { PORT } from './constants.js';
 
 const app = express();
-const exchangeDiff = new ExchangeDiff()
+app.use(bodyParser.json());
+
+const exchangeDiff = new ExchangeDiff();
 
 app.get('/currencies', async (req, res) => {
   const currencies = exchangeDiff.getAll();
@@ -12,6 +15,22 @@ app.get('/currencies', async (req, res) => {
 
 app.get('/currencies/:currency', async (req, res) => {
   res.send(exchangeDiff.getCurrency(req.params.currency.toUpperCase()));
+})
+
+app.post('/convert', async (req, res) => {
+  const { amount, currency } = req.body;
+  const result = exchangeDiff.getConvertedAmount(amount, currency);
+  res.send({
+    result,
+  })
+})
+
+app.post('/calculate', async (req, res) => {
+  const { amountFrom, amountTo, currencyFrom, currencyTo } = req.body;
+  const result = exchangeDiff.calculateDiff(amountFrom, amountTo, currencyFrom.toUpperCase(), currencyTo.toUpperCase());
+  res.send({
+    result,
+  });
 })
 
 app.listen(PORT, () => {
