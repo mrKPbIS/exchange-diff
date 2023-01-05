@@ -1,4 +1,4 @@
-# exchange-dif
+# exchange-diff
 
 Project for calcalating difference of actual exchange rate when changing money.
 
