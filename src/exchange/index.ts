@@ -34,12 +34,17 @@ export class ExchangeDiff {
         return this.convertToUSD(amount, code);
     } 
 
+    public isCurrency(value: string): boolean {
+        return this.currenciesList.has(value);
+    }
+
     private convertToUSD(amount: number, currency: string): number {
         const { rate } = this.getCurrency(currency);
         return amount / rate;
     }
 
     private async init() {
+        console.log('loading currencies...');
         const currenciesResponse = await requestCurrencies();
         const USDRates = await requestLatest();
         const codes = Object.keys(currenciesResponse);
