@@ -1,20 +1,25 @@
-export interface RequestCurrenciesResponse {
+export interface CurrenciesResponse {
     [key: string]: string;
 }
 
-export interface RequestLatestResponse {
+export interface LatestResponse {
     disclaimer: string;
     license: string;
     timestamp: number;
     base: string;
-    rates: RequestLatestRates;
+    rates: LatestRates;
 }
 
-export interface RequestLatestRates {
+export interface LatestRates {
     [key: string]: number;
 }
 
 export interface ErrorResponse {
+    url: string;
+    body: string;
+}
+
+export interface ErrorResponseBody {
     error: boolean;
     status: number;
     message: string;

@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const exchangeDiff = new ExchangeDiff();
-const messageBot = new MessageBot();
+const messageBot = new MessageBot(exchangeDiff);
 
 app.get('/currencies', async (req, res) => {
   const currencies = exchangeDiff.getAll();

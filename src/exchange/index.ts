@@ -1,5 +1,7 @@
-import { requestCurrencies, requestLatest } from '../ openexchange-client/index.js';
+import * as cron from 'node-cron';
+import { requestCurrencies, requestLatest } from '../openexchange-client/index.js';
 import { CalculateDiffResult, CurrenciesListItem } from './interfaces.js';
+import { CRON_SCHEDULE } from '../constants.js';
 
 export class ExchangeDiff {
   private currenciesList: Map<string, CurrenciesListItem> = new Map();
@@ -7,9 +9,6 @@ export class ExchangeDiff {
   constructor() {
     this.init();
   }
-
-
-  // TODO: update rates daily
 
   public calculateDiff(amountFrom: number, amountTo: number, currencyFrom: string, currencyTo: string): CalculateDiffResult {
     const convertedFrom = this.convertToUSD(amountFrom, currencyFrom);
@@ -44,7 +43,13 @@ export class ExchangeDiff {
   }
 
   private async init() {
+    this.updateCurrencies();
+    cron.schedule(CRON_SCHEDULE, this.updateCurrencies);
+  }
+
+  private async updateCurrencies(): Promise<void>  {
     console.log('loading currencies...');
+    console.log(new Date);
     const currenciesResponse = await requestCurrencies();
     const USDRates = await requestLatest();
     const codes = Object.keys(currenciesResponse);
