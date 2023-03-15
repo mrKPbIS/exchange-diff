@@ -2,6 +2,4 @@ FROM node:18-alpine
 WORKDIR /app
 COPY . .
 RUN npm i
-ENV APP_ID="92206079cbf940259ec63a7dc618ccab"
-ENV TELEGRAM_BOT_API_KEY="5851777882:AAFlSWcPpr1Swg3IGRqfEBCO5Dv_lVSCYzc"
 CMD ["npm", "run", "start"]
