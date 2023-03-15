@@ -32,7 +32,7 @@ export class MessageBot {
         return;
       }
       const [amountFrom, currencyFrom, amountTo, currencyTo] = params;
-      if (![currencyFrom, currencyTo].every(this.exchangeDiff.isCurrency)) {
+      if (!this.exchangeDiff.isCurrency(currencyFrom.toUpperCase()) || !this.exchangeDiff.isCurrency(currencyTo.toUpperCase())) {
         msg.reply.text(unknownCurrencyMessage());
         return;
       }

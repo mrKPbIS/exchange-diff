@@ -43,8 +43,8 @@ export class ExchangeDiff {
   }
 
   private async init() {
-    this.updateCurrencies();
-    cron.schedule(CRON_SCHEDULE, this.updateCurrencies);
+    await this.updateCurrencies();
+    cron.schedule(CRON_SCHEDULE, async () => { await this.updateCurrencies();});
   }
 
   private async updateCurrencies(): Promise<void>  {
