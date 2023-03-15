@@ -8,3 +8,8 @@ export interface CalculateDiffResult {
     convertedTo: number,
     diff: number,
 }
+
+export interface ConvertAmountResult {
+    amount: number;
+    rate: number;
+}

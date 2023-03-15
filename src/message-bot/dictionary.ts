@@ -7,6 +7,10 @@ export function calculateMessage(percentage: number, diff: number) {
   return `${percentage.toFixed(2)}% difference from official exchange rate. Or ${diff.toFixed(2)} USD`;
 }
 
+export function convertMessage(amount: number, rate: number, currencyFrom: string, currencyTo: string,) {
+  return `${amount.toFixed(2)} ${currencyTo.toUpperCase()}. Exchange rate is ${rate.toFixed(2)} ${currencyTo.toUpperCase()} per 1 ${currencyFrom.toUpperCase()}`;
+}
+
 export function unknownFormatMessage() {
   return 'Unknown format';
 }
