@@ -1,6 +1,7 @@
 export function commandsMesssage() {
   return 'Commands:\n'+
-        '"c amount1 currency1 amount2 currency2" - calculate difference of given exchange rate from official exchange rate.';
+        '"c amount1 currency1 amount2 currency2" - calculate difference of given exchange rate from official exchange rate.\n'+
+        '"r amount currency1 currency2" - calculate amount from currency1 to currency2';
 }
 
 export function calculateMessage(percentage: number, diff: number) {
