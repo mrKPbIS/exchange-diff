@@ -1,6 +1,6 @@
 import { default as Telebot } from 'telebot';
 import { TELEGRAM_BOT_API_KEY } from './constants.js';
-import { calculateMessage, commandsMesssage, unknownCurrencyMessage, unknownFormatMessage } from './dictionary.js';
+import { calculateMessage, commandsMesssage, convertMessage, unknownCurrencyMessage, unknownFormatMessage } from './dictionary.js';
 import { ExchangeDiff } from '../exchange/index.js';
 
 export class MessageBot {
@@ -27,7 +27,7 @@ export class MessageBot {
 
     this.bot.on(/^[cC] (.+)$/, (msg, props) => {
       const params: string[] = props.match[1].split(' ');
-      if (params.length != 4) {
+      if (params.length !== 4) {
         msg.reply.text(unknownFormatMessage);
         return;
       }
@@ -39,6 +39,21 @@ export class MessageBot {
     
       const result = this.exchangeDiff.calculateDiff(parseFloat(amountFrom), parseFloat(amountTo), currencyFrom.toUpperCase(), currencyTo.toUpperCase());
       msg.reply.text(calculateMessage(result.diff, Math.abs(result.convertedFrom-result.convertedTo)));
+    });
+
+    this.bot.on(/^[rR] (.+)$/, (msg, props) => {
+      const params: string = props.match[1].split(' ');
+      if (params.length !== 3) {
+        msg.reply.text(unknownFormatMessage);
+        return;
+      }
+      const [amount, currencyFrom, currencyTo] = params;
+      if (!this.exchangeDiff.isCurrency(currencyFrom.toUpperCase()) || !this.exchangeDiff.isCurrency(currencyTo.toUpperCase())) {
+        msg.reply.text(unknownCurrencyMessage());
+        return;
+      }
+      const result = this.exchangeDiff.convertAmount(parseFloat(amount), currencyFrom.toUpperCase(), currencyTo.toUpperCase());
+      msg.reply.text(convertMessage(result.amount, result.rate, currencyFrom, currencyTo));
     });
   }
 }

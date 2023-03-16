@@ -1,6 +1,6 @@
 import * as cron from 'node-cron';
 import { requestCurrencies, requestLatest } from '../openexchange-client/index.js';
-import { CalculateDiffResult, CurrenciesListItem } from './interfaces.js';
+import { CalculateDiffResult, ConvertAmountResult, CurrenciesListItem } from './interfaces.js';
 import { CRON_SCHEDULE } from '../constants.js';
 
 export class ExchangeDiff {
@@ -18,6 +18,16 @@ export class ExchangeDiff {
       convertedFrom,
       convertedTo,
       diff,
+    };
+  }
+
+  public convertAmount(amount: number, currencyFrom: string, currencyTo: string): ConvertAmountResult {
+    const rateFrom = this.getCurrency(currencyFrom).rate;
+    const rateTo = this.getCurrency(currencyTo).rate;
+    const rate = (1 / rateFrom) / (1 / rateTo);
+    return {
+      rate,
+      amount: rate*amount,
     };
   }
 
