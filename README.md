@@ -1,11 +1,10 @@
 # exchange-diff
 
-Project for calcalating difference of actual exchange rate when changing money.
+Project for calculating difference of actual exchange rate when changing money.
 
 TODO:
 
 - documentation and pretty bot input/output
-- load rates from file on startup
 
 Done:
 
