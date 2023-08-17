@@ -1,7 +1,7 @@
 import { default as Telebot } from 'telebot';
-import { TELEGRAM_BOT_API_KEY } from './constants.js';
-import { calculateMessage, commandsMesssage, convertMessage, unknownCurrencyMessage, unknownFormatMessage } from './dictionary.js';
-import { ExchangeDiff } from '../exchange/index.js';
+import { TELEGRAM_BOT_API_KEY } from './constants';
+import { calculateMessage, commandsMesssage, convertMessage, unknownCurrencyMessage, unknownFormatMessage } from './dictionary';
+import { ExchangeDiff } from '../exchange/index';
 
 export class MessageBot {
   private bot: Telebot;

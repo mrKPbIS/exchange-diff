@@ -1,8 +1,8 @@
 import { default as express } from 'express';
 import { default as bodyParser } from 'body-parser';
-import { ExchangeDiff } from './exchange/index.js';
-import { PORT } from './constants.js';
-import { MessageBot } from './message-bot/index.js';
+import { ExchangeDiff } from './exchange/index';
+import { PORT } from './constants';
+import { MessageBot } from './message-bot/index';
 
 const app = express();
 app.use(bodyParser.json());

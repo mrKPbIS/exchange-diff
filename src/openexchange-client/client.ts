@@ -1,6 +1,6 @@
-import got from 'got';
-import { baseUri, appId, EXCHANGE_PATH } from './constants.js';
-import { ErrorResponse, ErrorResponseBody, CurrenciesResponse, LatestResponse } from './interfaces.js';
+import { got } from 'got';
+import { baseUri, appId, EXCHANGE_PATH } from './constants';
+import { ErrorResponse, ErrorResponseBody, CurrenciesResponse, LatestResponse } from './interfaces';
 
 
 export async function requestCurrencies(): Promise<CurrenciesResponse> {

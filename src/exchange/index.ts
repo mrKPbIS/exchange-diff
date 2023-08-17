@@ -1,8 +1,8 @@
 import * as cron from 'node-cron';
 import * as fs from 'fs';
-import { requestCurrencies, requestLatest } from '../openexchange-client/index.js';
-import { CalculateDiffResult, ConvertAmountResult, CurrenciesListItem } from './interfaces.js';
-import { CRON_SCHEDULE, EXCHANGES_FILE_NAME } from './constants.js';
+import { requestCurrencies, requestLatest } from '../openexchange-client/index';
+import { CalculateDiffResult, ConvertAmountResult, CurrenciesListItem } from './interfaces';
+import { CRON_SCHEDULE, EXCHANGES_FILE_NAME } from './constants';
 
 export class ExchangeDiff {
   private currenciesList: Map<string, CurrenciesListItem> = new Map();
